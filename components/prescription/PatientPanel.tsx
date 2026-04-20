@@ -2,11 +2,11 @@
 
 import { User } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel, FieldDescription } from "@/components/ui/field";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select, SelectContent, SelectItem,
-  SelectTrigger, SelectValue,
+  SelectTrigger, SelectValue, SelectGroup, SelectLabel,
 } from "@/components/ui/select";
 
 const FRECUENCIAS = [
@@ -34,7 +34,7 @@ export function PatientPanel({ paciente, medico, frecuencia, duracion, notas, er
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ border: "1px solid #f0d6de" }}>
       <PanelHeader icon={User} title="Datos del paciente" color="#c2185b" />
 
-      <div className="p-5 space-y-4">
+      <FieldGroup className="p-5">
         <Field>
           <FieldLabel htmlFor="paciente">Nombre del paciente</FieldLabel>
           <Input
@@ -67,9 +67,12 @@ export function PatientPanel({ paciente, medico, frecuencia, duracion, notas, er
                 <SelectValue placeholder="Seleccionar" />
               </SelectTrigger>
               <SelectContent className="bg-white">
-                {FRECUENCIAS.map((f) => (
-                  <SelectItem key={f} value={f} className="text-gray-900">{f}</SelectItem>
-                ))}
+                <SelectGroup>
+                  <SelectLabel>Frecuencia de administración</SelectLabel>
+                  {FRECUENCIAS.map((f) => (
+                    <SelectItem key={f} value={f} className="text-gray-900">{f}</SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
             {errors.frecuencia && <FieldDescription className="text-red-500">{errors.frecuencia}</FieldDescription>}
@@ -82,9 +85,12 @@ export function PatientPanel({ paciente, medico, frecuencia, duracion, notas, er
                 <SelectValue placeholder="Seleccionar" />
               </SelectTrigger>
               <SelectContent className="bg-white">
-                {DURACIONES.map((d) => (
-                  <SelectItem key={d} value={d} className="text-gray-900">{d}</SelectItem>
-                ))}
+                <SelectGroup>
+                  <SelectLabel>Duración del tratamiento</SelectLabel>
+                  {DURACIONES.map((d) => (
+                    <SelectItem key={d} value={d} className="text-gray-900">{d}</SelectItem>
+                  ))}
+                </SelectGroup>
               </SelectContent>
             </Select>
             {errors.duracion && <FieldDescription className="text-red-500">{errors.duracion}</FieldDescription>}
@@ -102,7 +108,7 @@ export function PatientPanel({ paciente, medico, frecuencia, duracion, notas, er
             className="resize-none bg-white text-gray-900 placeholder:text-gray-400"
           />
         </Field>
-      </div>
+      </FieldGroup>
     </div>
   );
 }

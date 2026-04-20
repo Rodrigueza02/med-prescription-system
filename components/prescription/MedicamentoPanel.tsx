@@ -2,10 +2,10 @@
 
 import { Pill, CheckCircle2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel, FieldDescription } from "@/components/ui/field";
 import {
   Select, SelectContent, SelectItem,
-  SelectTrigger, SelectValue,
+  SelectTrigger, SelectValue, SelectGroup, SelectLabel,
 } from "@/components/ui/select";
 import {
   Command, CommandEmpty, CommandGroup,
@@ -48,7 +48,7 @@ export function MedicamentoPanel({
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden" style={{ border: "1px solid #f0d6de" }}>
       <PanelHeader />
 
-      <div className="p-5 space-y-4">
+      <FieldGroup className="p-5">
         {/* Medicamento seleccionado */}
         {seleccionado && (
           <SelectedMed med={seleccionado} />
@@ -118,14 +118,17 @@ export function MedicamentoPanel({
               <SelectValue placeholder={seleccionado ? "Seleccionar dosis" : "Selecciona un medicamento primero"} />
             </SelectTrigger>
             <SelectContent className="bg-white">
-              {(seleccionado?.dosisDisponibles ?? []).map((d) => (
-                <SelectItem key={d} value={d} className="text-gray-900">{d}</SelectItem>
-              ))}
+              <SelectGroup>
+                <SelectLabel>Dosis disponibles</SelectLabel>
+                {(seleccionado?.dosisDisponibles ?? []).map((d) => (
+                  <SelectItem key={d} value={d} className="text-gray-900">{d}</SelectItem>
+                ))}
+              </SelectGroup>
             </SelectContent>
           </Select>
           {errors.dosis && <FieldDescription className="text-red-500">{errors.dosis}</FieldDescription>}
         </Field>
-      </div>
+      </FieldGroup>
     </div>
   );
 }

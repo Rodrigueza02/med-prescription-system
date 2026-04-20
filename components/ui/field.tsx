@@ -14,6 +14,18 @@ const Field = React.forwardRef<
 ))
 Field.displayName = "Field"
 
+const FieldGroup = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("space-y-4", className)}
+    {...props}
+  />
+))
+FieldGroup.displayName = "FieldGroup"
+
 const FieldLabel = React.forwardRef<
   HTMLLabelElement,
   React.LabelHTMLAttributes<HTMLLabelElement>
@@ -41,4 +53,4 @@ const FieldDescription = React.forwardRef<
 ))
 FieldDescription.displayName = "FieldDescription"
 
-export { Field, FieldLabel, FieldDescription }
+export { Field, FieldGroup, FieldLabel, FieldDescription }
